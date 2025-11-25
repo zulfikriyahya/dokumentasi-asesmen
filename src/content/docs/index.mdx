@@ -28,48 +28,31 @@ import {
     <ShowcaseImage
       entries={[
         {
+          thumbnail: import("../../assets/asesmen/banner.png"),
+          href: "/asesmen",
+          title: "Pendahuluan",
+        },
+        {
           thumbnail: import("../../assets/asesmen/server/banner.png"),
           href: "/asesmen/server",
           title: "Server",
-          description: "...",
         },
         {
           thumbnail: import("../../assets/asesmen/jaringan/banner.png"),
           href: "/asesmen/jaringan",
           title: "Perangkat Jaringan",
-          description: "...",
         },
         {
           thumbnail: import("../../assets/asesmen/aplikasi/banner.png"),
           href: "/asesmen/aplikasi",
           title: "Aplikasi",
-          description: "...",
         },
         {
           thumbnail: import("../../assets/asesmen/bantuan/banner.png"),
           href: "/asesmen/bantuan",
           title: "Bantuan",
-          description: "...",
         },
       ]}
     />
-    <ShowcaseYouTube
-      entries={[
-        {
-          href: "https://www.youtube.com/watch?v=5u0Ds7wzUeI",
-          title: "Starlight by Astro",
-          description: "...",
-        },
-        {
-          href: "https://www.youtube.com/watch?v=TtRtkTzHVBU",
-          title: "The Astro Community",
-          description: "...",
-        },
-      ]}
-    />
-    ...
-    <LinkButton href="/asesmen" variant="primary">
-      Lihat Selengkapnya
-    </LinkButton>
   </Card>
 </CardGrid>
