@@ -1,0 +1,45 @@
+---
+title: "Bantuan Asesmen"
+description: "..."
+template: splash
+hero:
+  tagline: "..."
+  image:
+    file: ../../../../assets/asesmen/bantuan/banner.png
+  actions:
+    - text: Halaman Utama
+      link: /
+      icon: external
+    - text: Dokumentasi Asesmen
+      link: /asesmen
+      icon: right-arrow
+---
+
+import { Card, CardGrid, LinkButton } from "@astrojs/starlight/components";
+
+## Daftar Bantuan
+
+<CardGrid stagger>
+  <Card title="Bantuan Aplikasi" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/bantuan/aplikasi" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+  <Card title="Bantuan Jaringan" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/bantuan/jaringan" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+  <Card title="Bantuan Server" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/bantuan/server" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+</CardGrid>
+
+---
+
+TODO: Lengkapi konten mengenai bantuan asesmen.

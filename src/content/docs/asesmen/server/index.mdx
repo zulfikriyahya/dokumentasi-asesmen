@@ -1,0 +1,69 @@
+---
+title: "Server Asesmen"
+description: "..."
+template: splash
+hero:
+  tagline: "..."
+  image:
+    file: ../../../../assets/asesmen/server/banner.png
+  actions:
+    - text: Halaman Utama
+      link: /
+      icon: external
+    - text: Dokumentasi Asesmen
+      link: /asesmen
+      icon: right-arrow
+---
+
+import { Card, CardGrid, LinkButton } from "@astrojs/starlight/components";
+
+## Daftar Dokumentasi
+
+<CardGrid stagger>
+  <Card title="Spesifikasi Server" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/server/spesifikasi" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+  <Card title="Instalasi Sistem Operasi" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/server/install-os" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+  <Card title="Konfigurasi Sistem Operasi" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/server/konfigurasi-os" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+  <Card title="Instalasi Database Server" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/server/install-database" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+  <Card title="Konfigurasi Database Server" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/server/konfigurasi-database" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+  <Card title="Instalasi Web Server" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/server/install-web" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+  <Card title="Konfigurasi Web Server" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/server/konfigurasi-web" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+</CardGrid>
+
+---
+
+TODO: Lengkapi konten mengenai server untuk asesmen.
