@@ -5,3 +5,5 @@ sidebar:
 title: "Konfigurasi Sistem Operasi"
 description: "..."
 ---
+
+TODO: lengkapi isian ini dengan bahasa yang informatif.

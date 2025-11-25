@@ -5,3 +5,5 @@ sidebar:
 title: "Spesifikasi Server"
 description: "..."
 ---
+
+TODO: lengkapi isian ini dengan bahasa yang informatif.

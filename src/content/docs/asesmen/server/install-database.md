@@ -6,4 +6,4 @@ title: "Instalasi Database Server"
 description: "..."
 ---
 
-TODO:
+TODO: lengkapi isian ini dengan bahasa yang informatif.
