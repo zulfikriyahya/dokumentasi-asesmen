@@ -1,9 +1,217 @@
 ---
-draft: true
+draft: false
 sidebar:
   order: 3
 title: "Konfigurasi Router"
 description: "..."
 ---
 
-TODO: lengkapi isian ini dengan bahasa yang informatif.
+## Pendahuluan
+
+Panduan ini menjelaskan langkah-langkah konfigurasi TP-Link TL-WR840N untuk sistem CBT offline. Ada dua jenis konfigurasi:
+
+1. **Router 1 (Main Router)** - Mode Wireless Router
+2. **Router 2-10 (Access Point)** - Mode Access Point
+
+---
+
+## Persiapan Awal
+
+### Tools yang Dibutuhkan
+
+- ✅ Laptop untuk konfigurasi
+- ✅ Kabel LAN (untuk connect laptop ke router)
+- ✅ Browser (Chrome, Firefox, atau Edge)
+- ✅ Notepad untuk mencatat konfigurasi
+- ✅ Stiker label untuk menandai router
+
+### Default Settings TP-Link TL-WR840N
+
+```
+Default IP: 192.168.0.1
+Default Username: admin
+Default Password: admin
+Default SSID: TP-LINK_XXXX (XXXX = 4 digit terakhir MAC)
+```
+
+### Persiapan Workspace
+
+1. Siapkan meja kerja yang cukup
+2. Pastikan power outlet tersedia
+3. Siapkan semua 10 router
+4. Beri label pada setiap router (Router 1 s/d Router 10)
+
+---
+
+## BAGIAN 1: Konfigurasi Router 1 (Main Router)
+
+### Step 1: Akses Web Interface
+
+1. **Hubungkan Router ke Laptop**
+
+   - Colokkan power adapter ke Router 1
+   - Hubungkan kabel LAN dari laptop ke port LAN router (port kuning)
+   - Tunggu hingga LED power dan LAN menyala
+
+2. **Set IP Laptop (Jika Perlu)**
+
+   - Biasanya DHCP akan otomatis assign IP
+   - Jika tidak bisa akses, set manual:
+     ```
+     IP Address: 192.168.0.100
+     Subnet Mask: 255.255.255.0
+     Gateway: 192.168.0.1
+     ```
+
+3. **Buka Browser dan Akses Router**
+   - Buka browser
+   - Ketik: `http://192.168.0.1`
+   - Tekan Enter
+   - Login dengan:
+     - Username: `admin`
+     - Password: `admin`
+
+### Step 2: Quick Setup Wizard (Opsional - Skip untuk Manual Setup)
+
+Klik **"Skip"** atau **"Exit"** pada Quick Setup Wizard untuk konfigurasi manual yang lebih detail.
+
+### Step 3: Ubah IP Address Router
+
+1. **Masuk ke Network → LAN**
+2. **Ubah konfigurasi:**
+   ```
+   IP Address: 192.168.1.1
+   Subnet Mask: 255.255.255.0
+   ```
+3. **Save/Apply**
+4. **Router akan restart**
+5. **Setelah restart, akses router di:** `http://192.168.1.1`
+
+### Step 4: Konfigurasi DHCP Server
+
+1. **Masuk ke DHCP → DHCP Settings**
+2. **Enable DHCP Server:** ✅ Checked
+3. **Konfigurasi DHCP Pool:**
+   ```
+   Start IP Address: 192.168.1.101
+   End IP Address: 192.168.1.120
+   Default Gateway: 192.168.1.1
+   Primary DNS: 192.168.1.100 (server CBT)
+   Secondary DNS: 8.8.8.8 (Google DNS sebagai backup)
+   Lease Time: 120 minutes (2 jam)
+   ```
+4. **Save/Apply**
+
+### Step 5: Konfigurasi Wireless
+
+1. **Masuk ke Wireless → Wireless Settings**
+2. **Konfigurasi Basic Settings:**
+   ```
+   SSID: ASESMEN-CBT
+   Region: Indonesia
+   Channel: 6 (atau sesuaikan dengan kondisi)
+   Mode: 11bgn mixed (atau 11n only untuk performa lebih baik)
+   Channel Width: 20MHz
+   Max Tx Rate: 300Mbps
+   ```
+3. **Enable Wireless:** ✅ Checked
+4. **Enable SSID Broadcast:** ✅ Checked
+5. **Save/Apply**
+
+### Step 6: Konfigurasi Wireless Security
+
+1. **Masuk ke Wireless → Wireless Security**
+2. **Pilih WPA/WPA2-Personal (Recommended)**
+3. **Konfigurasi:**
+   ```
+   Version: WPA2-PSK
+   Encryption: AES
+   Password/PSK: [Buat password kuat min 8 karakter]
+   Contoh: AsesmenCBT2024!
+   ```
+4. **Save/Apply**
+
+### Step 7: Konfigurasi Advanced Settings
+
+#### A. Wireless Advanced Settings
+
+**Masuk ke Wireless → Wireless Advanced**
+
+```
+Transmit Power: High (100%)
+Beacon Interval: 100
+RTS Threshold: 2346
+Fragmentation Threshold: 2346
+DTIM Interval: 1
+WMM: Enable (✅) - Penting untuk QoS
+Short GI: Enable
+AP Isolation: Disable (siswa perlu akses ke server)
+```
+
+#### B. DHCP → Address Reservation (untuk Server)
+
+**Reserve IP untuk Server CBT:**
+
+1. Masuk ke **DHCP → Address Reservation**
+2. Klik **Add New**
+3. Masukkan:
+   ```
+   MAC Address: [MAC Address server - lihat dari ifconfig/ipconfig]
+   Reserved IP: 192.168.1.100
+   Status: Enabled
+   ```
+4. **Save**
+
+### Step 8: Security Settings
+
+#### A. Change Admin Password
+
+1. **Masuk ke System Tools → Password**
+2. **Ubah password default:**
+   ```
+   Old Username: admin
+   Old Password: admin
+   New Username: admin
+   New Password: [Password baru yang kuat]
+   Confirm Password: [Ulangi password]
+   ```
+3. **Save**
+
+#### B. Firewall Settings
+
+1. **Masuk ke Security → Firewall**
+2. **Konfigurasi:**
+   ```
+   ✅ Enable SPI Firewall
+   ✅ Enable DOS Protection
+   ☐ Disable Ping from WAN Port (unchecked - kita tidak pakai WAN)
+   ```
+
+### Step 9: System Settings
+
+#### A. Time Settings
+
+1. **Masuk ke System Tools → Time Settings**
+2. **Set Time Zone:**
+   ```
+   Time Zone: GMT+7:00 (Bangkok, Hanoi, Jakarta)
+   ```
+3. **Manual Time Setting** atau **NTP Server** (jika ada koneksi internet saat setup)
+
+#### B. System Log
+
+1. **Masuk ke System Tools → System Log**
+2. **Enable System Log** (untuk troubleshooting)
+
+### Step 10: Save Configuration
+
+1. **Masuk ke System Tools → Backup & Restore**
+2. **Klik Backup** untuk save konfigurasi
+3. **Simpan file .bin** ke laptop dengan nama: `Router1_MainRouter_Config.bin`
+
+### Step 11: Test Connection
+
+1. **Connect laptop/HP ke WiFi ASESMEN-CBT**
+2. **Cek IP Address yang didapat** (harus 192.168.1.101-120)
+3. **Ping ke gateway:** `ping 192.168.1.1`
+4. **Ping ke server:** `ping 192.168.1.100` (pastikan server sudah hidup)

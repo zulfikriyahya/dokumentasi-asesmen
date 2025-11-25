@@ -1,9 +1,370 @@
 ---
-draft: true
+draft: false
 sidebar:
   order: 4
 title: "Konfigurasi Access Point"
 description: "..."
 ---
 
-TODO: lengkapi isian ini dengan bahasa yang informatif.
+## Konfigurasi Router 2-10 (Access Point Mode)
+
+### Konsep Access Point Mode
+
+Dalam mode Access Point:
+
+- Router berfungsi sebagai WiFi Access Point saja
+- Tidak melakukan routing atau NAT
+- DHCP Server tetap aktif (masing-masing AP punya DHCP pool sendiri)
+- Semua AP terhubung ke Router 1 via kabel LAN
+
+### Step 1: Akses Router (Default Settings)
+
+1. Hubungkan Router ke laptop via kabel LAN
+2. Akses `http://192.168.0.1`
+3. Login: admin/admin
+
+### Step 2: Ubah IP Address
+
+**Untuk Router 2:**
+
+1. Masuk ke **Network → LAN**
+2. Ubah:
+   ```
+   IP Address: 192.168.1.2
+   Subnet Mask: 255.255.255.0
+   ```
+3. **Save/Apply**
+4. **Setelah restart, akses:** `http://192.168.1.2`
+
+**Ulangi untuk Router 3-10 dengan IP:**
+
+- Router 3: 192.168.1.3
+- Router 4: 192.168.1.4
+- Router 5: 192.168.1.5
+- Router 6: 192.168.1.6
+- Router 7: 192.168.1.7
+- Router 8: 192.168.1.8
+- Router 9: 192.168.1.9
+- Router 10: 192.168.1.10
+
+### Step 3: Disable WAN (Jika Ada Opsi)
+
+1. Masuk ke **Network → WAN**
+2. **Set WAN Connection Type:** `Disable`
+3. Atau abaikan WAN settings (tidak dipakai)
+
+### Step 4: Konfigurasi DHCP Server
+
+**Untuk Router 2:**
+
+1. Masuk ke **DHCP → DHCP Settings**
+2. **Enable DHCP Server:** ✅ Checked
+3. Konfigurasi:
+   ```
+   Start IP: 192.168.1.121
+   End IP: 192.168.1.142
+   Gateway: 192.168.1.1 (Main Router)
+   Primary DNS: 192.168.1.100 (Server CBT)
+   Secondary DNS: 8.8.8.8
+   Lease Time: 120 minutes
+   ```
+4. **Save**
+
+**Untuk Router 3-10, gunakan tabel berikut:**
+
+| Router    | Start IP      | End IP        | Total IP |
+| --------- | ------------- | ------------- | -------- |
+| Router 2  | 192.168.1.121 | 192.168.1.142 | 22       |
+| Router 3  | 192.168.1.143 | 192.168.1.164 | 22       |
+| Router 4  | 192.168.1.165 | 192.168.1.186 | 22       |
+| Router 5  | 192.168.1.187 | 192.168.1.208 | 22       |
+| Router 6  | 192.168.1.209 | 192.168.1.230 | 22       |
+| Router 7  | 192.168.1.231 | 192.168.1.252 | 22       |
+| Router 8  | 192.168.1.11  | 192.168.1.32  | 22       |
+| Router 9  | 192.168.1.33  | 192.168.1.54  | 22       |
+| Router 10 | 192.168.1.55  | 192.168.1.76  | 22       |
+
+**Gateway dan DNS tetap sama untuk semua router:**
+
+```
+Gateway: 192.168.1.1
+Primary DNS: 192.168.1.100
+Secondary DNS: 8.8.8.8
+```
+
+### Step 5: Konfigurasi Wireless
+
+#### Opsi A: SSID yang Sama (Seamless Roaming)
+
+**Untuk Router 2-10 (semua menggunakan SSID sama):**
+
+1. Masuk ke **Wireless → Wireless Settings**
+2. Konfigurasi:
+   ```
+   SSID: ASESMEN-CBT (sama dengan Router 1)
+   Channel: Rotasi 1, 6, 11 (lihat tabel di bawah)
+   Mode: 11bgn mixed
+   Channel Width: 20MHz
+   ```
+
+**Channel Assignment:**
+
+```
+Router 2 → Channel 1
+Router 3 → Channel 6
+Router 4 → Channel 11
+Router 5 → Channel 1
+Router 6 → Channel 6
+Router 7 → Channel 11
+Router 8 → Channel 1
+Router 9 → Channel 6
+Router 10 → Channel 11
+```
+
+#### Opsi B: SSID Berbeda (Identifikasi Per Rombel)
+
+```
+Router 2 → SSID: ASESMEN-R1, Channel: 1
+Router 3 → SSID: ASESMEN-R2, Channel: 6
+Router 4 → SSID: ASESMEN-R3, Channel: 11
+Router 5 → SSID: ASESMEN-R4, Channel: 1
+Router 6 → SSID: ASESMEN-R5, Channel: 6
+Router 7 → SSID: ASESMEN-R6, Channel: 11
+Router 8 → SSID: ASESMEN-R7, Channel: 1
+Router 9 → SSID: ASESMEN-R8, Channel: 6
+Router 10 → SSID: ASESMEN-R9, Channel: 11
+```
+
+### Step 6: Wireless Security (Sama untuk Semua)
+
+1. Masuk ke **Wireless → Wireless Security**
+2. Pilih **WPA/WPA2-Personal**
+3. Konfigurasi:
+   ```
+   Version: WPA2-PSK
+   Encryption: AES
+   Password: AsesmenCBT2024! (sama dengan Router 1)
+   ```
+4. **Save**
+
+### Step 7: Wireless Advanced Settings
+
+```
+Transmit Power: High (100%)
+WMM: Enable
+AP Isolation: Disable
+```
+
+### Step 8: Change Admin Password
+
+Sama seperti Router 1, ubah password admin untuk keamanan.
+
+### Step 9: Backup Configuration
+
+1. **System Tools → Backup & Restore**
+2. **Backup** dan simpan dengan nama: `Router2_AP_Config.bin` (dst)
+
+### Step 10: Physical Connection
+
+**Setelah semua router dikonfigurasi:**
+
+1. **Hubungkan Router 2-10 ke Router 1:**
+
+   - Gunakan port **LAN** di Router 1 (port kuning)
+   - Gunakan port **LAN** di Router 2-10 (BUKAN port WAN/biru)
+   - Jika port LAN Router 1 tidak cukup, gunakan Switch
+
+2. **Topologi Kabel:**
+
+   ```
+   Server ----[LAN]---- Router 1 ----[LAN]---- Router 2
+                           |
+                           +-------[LAN]---- Router 3
+                           |
+                           +-------[LAN]---- Router 4
+                           |
+                           ... dst
+   ```
+
+3. **Atau menggunakan Switch:**
+   ```
+   Server ----[LAN]---- Router 1 ----[LAN]---- Switch ----[LAN]---- Router 2
+                                                  |----[LAN]---- Router 3
+                                                  |----[LAN]---- Router 4
+                                                  ... dst
+   ```
+
+---
+
+## Testing dan Verifikasi
+
+### Test Checklist
+
+#### Test Router 1 (Main Router)
+
+- [ ] Dapat diakses di http://192.168.1.1
+- [ ] DHCP memberikan IP 192.168.1.101-120
+- [ ] WiFi ASESMEN-CBT dapat diakses
+- [ ] Password WiFi bekerja dengan benar
+- [ ] Ping ke 192.168.1.1 berhasil
+- [ ] Ping ke 192.168.1.100 (server) berhasil
+
+#### Test Router 2-10 (Access Point)
+
+- [ ] Masing-masing dapat diakses di IP-nya (192.168.1.2-10)
+- [ ] DHCP memberikan IP sesuai pool yang dikonfigurasi
+- [ ] WiFi dapat diakses dengan SSID yang benar
+- [ ] Password WiFi sama dengan Router 1 (jika pakai SSID sama)
+- [ ] Device yang connect dapat ping ke 192.168.1.1
+- [ ] Device yang connect dapat ping ke 192.168.1.100 (server)
+- [ ] Device dapat akses aplikasi CBT
+
+### Testing Procedure
+
+1. **Test Satu Router per Waktu**
+
+   - Connect laptop/HP ke WiFi router yang akan ditest
+   - Cek IP Address yang didapat (harus sesuai DHCP pool)
+   - Ping ke gateway (192.168.1.1)
+   - Ping ke server (192.168.1.100)
+   - Buka browser, akses IP server: http://192.168.1.100
+
+2. **Test Load dengan Multiple Devices**
+
+   - Connect 5-10 device ke satu router
+   - Pastikan semua dapat IP dan akses server
+   - Cek performa (speed dan latency)
+
+3. **Test Roaming (Jika Pakai SSID Sama)**
+   - Connect ke Router 2
+   - Berjalan ke area Router 3
+   - Cek apakah otomatis pindah (roaming) tanpa putus koneksi
+
+---
+
+## Troubleshooting
+
+### Problem: Tidak Bisa Akses Router Setelah Ubah IP
+
+**Solusi:**
+
+1. Reset IP laptop ke DHCP auto
+2. Atau set IP manual:
+   ```
+   IP: 192.168.1.200
+   Subnet: 255.255.255.0
+   Gateway: 192.168.1.1
+   ```
+3. Akses router di IP baru-nya
+
+### Problem: Device Tidak Dapat IP dari DHCP
+
+**Solusi:**
+
+1. Cek DHCP Server di router adalah "Enabled"
+2. Cek DHCP pool tidak bentrok dengan IP lain
+3. Cek lease time tidak terlalu pendek
+4. Restart router
+5. Release/Renew IP di device (disable/enable WiFi)
+
+### Problem: Bisa Connect WiFi tapi Tidak Bisa Akses Server
+
+**Solusi:**
+
+1. Ping ke gateway (192.168.1.1) - jika gagal, masalah di router
+2. Ping ke server (192.168.1.100) - jika gagal, cek:
+   - Kabel LAN dari AP ke Router 1
+   - Server sudah hidup dan web service running
+   - Firewall di server tidak block akses
+3. Cek DNS setting di DHCP (harus 192.168.1.100)
+
+### Problem: WiFi Lambat atau Sering Putus
+
+**Solusi:**
+
+1. Cek interference dengan WiFi Analyzer
+2. Ubah channel WiFi (gunakan channel 1, 6, atau 11)
+3. Reduce transmit power jika terlalu banyak overlap
+4. Cek jumlah connected device tidak melebihi 25
+5. Restart Access Point
+
+### Problem: Lupa Password Admin Router
+
+**Solusi:**
+
+1. Reset router ke factory default:
+   - Tekan dan tahan tombol **Reset** selama 10 detik
+   - Router akan restart dengan default setting
+2. Konfigurasikan ulang dari awal
+3. Atau restore dari backup file .bin
+
+---
+
+## Tips dan Best Practices
+
+### Labeling
+
+- 🏷️ Beri label fisik pada setiap router (stiker)
+- 🏷️ Tulis: "Router X - IP 192.168.1.X - Rombel X"
+- 🏷️ Beri warna berbeda untuk identifikasi cepat
+
+### Dokumentasi
+
+- 📝 Catat semua IP address dan konfigurasi di buku
+- 📝 Simpan backup file .bin di laptop dan flashdisk
+- 📝 Buat diagram jaringan dan tempel di ruang server
+
+### Maintenance
+
+- 🔧 Restart semua router sebelum asesmen dimulai
+- 🔧 Cek koneksi kabel secara berkala
+- 🔧 Monitor connected devices selama asesmen
+- 🔧 Siapkan 1-2 router cadangan (sudah dikonfigurasi)
+
+### Security
+
+- 🔒 Ubah password admin default SEMUA router
+- 🔒 Gunakan password WiFi yang kuat
+- 🔒 Catat password di tempat aman
+- 🔒 Jangan share password WiFi ke umum
+
+---
+
+## Lampiran: Quick Reference Card
+
+### Router 1 - Main Router
+
+```
+IP: 192.168.1.1
+DHCP: 192.168.1.101-120 (20 device)
+Mode: Wireless Router
+SSID: ASESMEN-CBT
+Channel: 6
+```
+
+### Router 2-10 - Access Point
+
+```
+Router 2: IP 192.168.1.2, DHCP 192.168.1.121-142
+Router 3: IP 192.168.1.3, DHCP 192.168.1.143-164
+Router 4: IP 192.168.1.4, DHCP 192.168.1.165-186
+Router 5: IP 192.168.1.5, DHCP 192.168.1.187-208
+Router 6: IP 192.168.1.6, DHCP 192.168.1.209-230
+Router 7: IP 192.168.1.7, DHCP 192.168.1.231-252
+Router 8: IP 192.168.1.8, DHCP 192.168.1.11-32
+Router 9: IP 192.168.1.9, DHCP 192.168.1.33-54
+Router 10: IP 192.168.1.10, DHCP 192.168.1.55-76
+
+Mode: Access Point
+SSID: ASESMEN-CBT (atau ASESMEN-R1 s/d R9)
+Channel: Rotasi 1, 6, 11
+Gateway: 192.168.1.1
+DNS: 192.168.1.100
+```
+
+### Server CBT
+
+```
+IP: 192.168.1.100
+Gateway: 192.168.1.1
+```
