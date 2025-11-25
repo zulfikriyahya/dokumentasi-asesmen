@@ -1,0 +1,34 @@
+---
+draft: true
+sidebar:
+  order: 1
+  # hidden: true
+  label: Pelaksanaan Asesmen
+title: "Pelaksanaan Asesmen"
+description: "..."
+template: splash
+hero:
+  tagline: "..."
+  image:
+    file: ../../../../../assets/asesmen/aplikasi/pelaksanaan-asesmen.png
+  actions:
+    - text: Dokumentasi Asesmen
+      link: /asesmen
+      icon: external
+    - text: Dokumentasi Aplikasi
+      link: /asesmen/aplikasi
+      icon: right-arrow
+---
+
+import { Card, CardGrid, LinkButton } from "@astrojs/starlight/components";
+
+## Daftar Pelaksanaan
+
+<CardGrid stagger>
+  <Card title="Pelaksanaan Aplikasi" icon="pencil">
+    ...
+    <LinkButton href="/asesmen/aplikasi/pelaksanaan-asesmen" variant="primary">
+      Lihat Selengkapnya
+    </LinkButton>
+  </Card>
+</CardGrid>

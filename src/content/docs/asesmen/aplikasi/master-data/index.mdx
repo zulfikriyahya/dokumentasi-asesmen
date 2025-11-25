@@ -3,35 +3,32 @@ draft: true
 sidebar:
   order: 1
   # hidden: true
-title: "Aplikasi Asesmen"
+  label: Pengguna Asesmen
+title: "Pengguna Asesmen"
 description: "..."
 template: splash
 hero:
   tagline: "..."
   image:
-    file: ../../../../assets/asesmen/aplikasi/banner.png
+    file: ../../../../../assets/asesmen/aplikasi/pengguna.png
   actions:
-    - text: Halaman Utama
-      link: /
-      icon: external
     - text: Dokumentasi Asesmen
       link: /asesmen
+      icon: external
+    - text: Dokumentasi Aplikasi
+      link: /asesmen/aplikasi
       icon: right-arrow
 ---
 
 import { Card, CardGrid, LinkButton } from "@astrojs/starlight/components";
 
-## Daftar Dokumentasi
+## Daftar Pengguna
 
-<CardGrid>
-  <Card title="..." icon="pencil">
+<CardGrid stagger>
+  <Card title="pengguna Aplikasi" icon="pencil">
     ...
-    <LinkButton href="/asesmen/aplikasi/..." variant="primary">
+    <LinkButton href="/asesmen/pengguna/aplikasi" variant="primary">
       Lihat Selengkapnya
     </LinkButton>
   </Card>
 </CardGrid>
-
----
-
-TODO: Isi konten mengenai Aplikasi Asesmen.

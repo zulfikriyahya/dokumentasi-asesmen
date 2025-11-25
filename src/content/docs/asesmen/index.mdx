@@ -1,4 +1,8 @@
 ---
+draft: true
+sidebar:
+  order: 1
+  # hidden: true
 title: "Dokumentasi Asesmen"
 description: "..."
 template: splash
@@ -13,16 +17,42 @@ hero:
 ---
 
 import { Card, CardGrid, LinkButton } from "@astrojs/starlight/components";
+import {
+  ShowcaseText,
+  ShowcaseImage,
+  ShowcaseCTA,
+  ShowcaseYouTube,
+} from "starlight-showcases";
 
 ## Daftar Dokumentasi
 
 <CardGrid>
   <Card title="Server" icon="pencil">
+    <ShowcaseImage
+      entries={[
+        {
+          thumbnail: import("../../../assets/asesmen/server/spesifikasi.png"),
+          href: "/asesmen/server/spesifikasi",
+          title: "Spesifikasi Server",
+        },
+        {
+          thumbnail: import("../../../assets/asesmen/server/install-os/banner.png"),
+          href: "/asesmen/server/install-os",
+          title: "Instalasi Sistem Operasi",
+        },
+        {
+          thumbnail: import("../../../assets/asesmen/server/konfigurasi-os/banner.png"),
+          href: "/asesmen/server/konfigurasi-os",
+          title: "Konfigurasi Sistem Operasi",
+        },
+      ]}
+    />
     ...
     <LinkButton href="/asesmen/server" variant="primary">
       Lihat Selengkapnya
     </LinkButton>
   </Card>
+
   <Card title="Perangkat Jaringan" icon="pencil">
     ...
     <LinkButton href="/asesmen/jaringan" variant="primary">
