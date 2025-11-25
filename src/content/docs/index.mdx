@@ -14,14 +14,62 @@ hero:
 ---
 
 import { Card, CardGrid, LinkButton } from "@astrojs/starlight/components";
+import {
+  ShowcaseText,
+  ShowcaseImage,
+  ShowcaseCTA,
+  ShowcaseYouTube,
+} from "starlight-showcases";
 
 ## Daftar Dokumentasi
 
-<CardGrid stagger>
+<CardGrid>
   <Card title="Dokumentasi Asesmen" icon="pencil">
     ...
     <LinkButton href="/asesmen" variant="primary">
       Lihat Selengkapnya
     </LinkButton>
+    <ShowcaseImage
+      entries={[
+        {
+          thumbnail: import("../../assets/asesmen/server/banner.png"),
+          href: "/asesmen/server",
+          title: "Server",
+          description: "...",
+        },
+        {
+          thumbnail: import("../../assets/asesmen/jaringan/banner.png"),
+          href: "/asesmen/jaringan",
+          title: "Perangkat Jaringan",
+          description: "...",
+        },
+        {
+          thumbnail: import("../../assets/asesmen/aplikasi/banner.png"),
+          href: "/asesmen/aplikasi",
+          title: "Aplikasi",
+          description: "...",
+        },
+        {
+          thumbnail: import("../../assets/asesmen/bantuan/banner.png"),
+          href: "/asesmen/bantuan",
+          title: "Bantuan",
+          description: "...",
+        },
+      ]}
+    />
+    <ShowcaseYouTube
+      entries={[
+        {
+          href: "https://www.youtube.com/watch?v=5u0Ds7wzUeI",
+          title: "Starlight by Astro",
+          description: "...",
+        },
+        {
+          href: "https://www.youtube.com/watch?v=TtRtkTzHVBU",
+          title: "The Astro Community",
+          description: "...",
+        },
+      ]}
+    />
   </Card>
 </CardGrid>
